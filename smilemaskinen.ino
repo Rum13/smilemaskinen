@@ -1,32 +1,36 @@
+#define potPin A1
+#define servoPin 11
+#define transistorPin 12
+#define loMapFrom 200
+#define hiMapFrom 700
+#define loMapTo 50
+#define hiMapTo 120
+
 #include <LowPower.h>
 #include <Servo.h>
 
 Servo myservo;
 
-int potPin = A1;  // analog pin used to connect the potentiometer
-int val;    // variable to read the value from the analog pin
+
+int potVal;    // variable to read the value from the analog pin
 int oldVal = 200;
 
 void setup() {
-  pinMode(12, OUTPUT);
-  myservo.attach(11);
+  pinMode(transistorPin, OUTPUT);
+  myservo.attach(servoPin);
 }
 
 void loop() {
-  val = analogRead(potPin);
+  potVal = analogRead(potPin);
+  int servoVal = map(potVal, loMapFrom, hiMapFrom, loMapTo, hiMapTo);
 
-  //val = map(val, 10, 800, 60, 120);
-  val = map(val, 200, 700, 50, 120);
-
-  int tempVal=val-oldVal;
-
-  if(abs(tempVal)>=10){
-    digitalWrite(12,HIGH);
-
-    myservo.write(val);                  // sets the servo position according to the scaled value
-    oldVal=val;
+  if(abs(oldVal - servoVal)>=10){
+    digitalWrite(transistorPin, HIGH);
+    myservo.write(servoVal);                  // sets the servo position according to the scaled value
+    
+    oldVal = servoVal;
+    
     delay(250);                           // waits for the servo to get there
-
     digitalWrite(12,LOW);
   }
 
