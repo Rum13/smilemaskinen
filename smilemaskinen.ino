@@ -7,7 +7,7 @@
 #define hiMapTo 120
 #define moveThreshold 10
 #define servoDelay 250
-#define avgCounter 20
+#define avgCounter 5
 
 #include <LowPower.h>
 #include <Servo.h>
@@ -53,5 +53,5 @@ void loop() {
         oldVal = servoVal;
     }
 
-    LowPower.powerDown(SLEEP_4S, ADC_OFF, BOD_OFF);
+    LowPower.powerDown(SLEEP_500MS, ADC_OFF, BOD_OFF);
 }
