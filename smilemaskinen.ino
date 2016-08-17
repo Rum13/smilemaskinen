@@ -1,11 +1,11 @@
 #define ldrPin A0
-#define fetPin 10
-#define servoPin 11
-#define ldrPower 12
+#define fetPin 16
+#define servoPin 10
+#define ldrPower 15
 #define loMapFrom 150
 #define hiMapFrom 470
-#define loMapTo 160
-#define hiMapTo 50
+#define loMapTo 50
+#define hiMapTo 160
 #define moveThreshold 5
 #define servoDelay 250
 #define avgCounter 10
